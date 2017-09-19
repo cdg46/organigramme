@@ -1,5 +1,331 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you give
+% someone the link to this page, they can edit at the same
+% time. See the help menu above for more info. Enjoy!
+%
+% Note: you can export the pdf to see the result at full
+% resolution.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[8pt,a4paper]{minimal}
+\usepackage[a4paper,margin=0.5cm,landscape]{geometry}
+\usepackage{ marvosym }
+\usepackage{color}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\usetikzlibrary{positioning}
 \begin{document}
-(Type your content here.)
+\definecolor{vert}{cmyk}{0.40,0,1,0}
+\definecolor{mauve}{cmyk}{0.40,1,0.3,0}
+\definecolor{bleuSante}{cmyk}{1,0.70,0,0}
+\definecolor{bleuNum}{cmyk}{1,0,0.25,0}
+\definecolor{ocre}{cmyk}{0,0.35,1,0.20}
+\definecolor{rose}{cmyk}{0.20,0.60,0.10,0}
+\definecolor{gris}{cmyk}{0,0.13,0.08,0.50}
+\begin{tikzpicture}[
+  edge from parent fork down,
+  edge from parent/.style={gray,thick,draw},
+  basic/.style  = {draw, text width=4cm, drop shadow, font=\sffamily\mdseries,rectangle},
+  root/.style   = {basic, rounded corners=4pt, thin, align=center,
+                   fill=rose, anchor=south,text width=8cm},
+  level 1/.style={root, sibling distance=4cm, text width=4.5cm,anchor=north},
+  level 2/.style={sibling distance=4cm, rectangle, draw=black, rounded corners, fill=green, drop shadow,
+        text centered, anchor=west, text=black, text width=4cm},
+  level 3/.style={sibling distance=4cm, rectangle, draw=black, rounded corners, fill=green, drop shadow,
+        text centered, anchor=west, text=black, text width=4cm},
+  boite 1/.style={level 1, rectangle, draw=black, rounded corners, fill=green, text centered},
+  vertColors/.style={text=black, fill=vert},
+  mauveColors/.style={text=white, fill=mauve},
+  bleuSanteColors/.style={text=white, fill=bleuSante},
+  bleuNumColors/.style={text=white, fill=bleuNum},
+  ocreColors/.style={text=black, fill=ocre},
+  roseColors/.style={text=black, fill=rose},
+  ]
+\tikzstyle{PAGM}=[boite 1, ocreColors]
+\tikzstyle{PAGMService}=[level 2, ocreColors]
+\tikzstyle{PECR}=[boite 1, mauveColors]
+\tikzstyle{PECRService}=[level 2, mauveColors]
+\tikzstyle{PCSGC}=[boite 1, vertColors]
+\tikzstyle{PCSGCService}=[level 2, vertColors]
+\tikzstyle{PSPPS}=[boite 1, bleuSanteColors]
+\tikzstyle{PSPPSService}=[level 2, bleuSanteColors]
+\tikzstyle{PN}=[boite 1, bleuNumColors]
+\tikzstyle{PNService}=[level 2, bleuNumColors]
+
+\title{Organigrame du CDG46}
+% root of the the initial tree, level 1
+\node(ConseilAdministration)[left, root, rectangle split, rectangle split parts=2, fill=gris, text=white, xshift=50pt]
+{
+  \textbf{ Conseil d'Administration}
+  \nodepart{second}Pr\'esident : Monsieur PETIT
+};
+\node(direction)[below of =ConseilAdministration, xshift=320pt, yshift=12pt, root, rectangle split, rectangle split parts=2]
+{
+  \textbf{Direction}
+  \nodepart{second}direction\verb+@+cdg46.fr
+};
+\node [below of = direction, root, yshift=-10pt] (c0) {
+  \textnormal{Brigitte Henras}
+};
+  \node[root, rectangle split, rectangle split parts=2, xshift=560pt, yshift=-2pt, text width=4cm] (c01) {
+      \textbf{Secr\'etariat de Direction}
+      \nodepart{second}secretaire\verb+@+cdg46.fr
+    };
+\node [below of = c01, root, yshift=-10pt, text width=4cm] (c441) {
+  \textnormal{Fabienne FRAYSSE}
+};
+% Les pôles
+  \node[PAGM, rectangle split, rectangle split parts=2, xshift=0pt, yshift=-50pt, yshift=-15pt] (c1) {
+      \textbf{P\^ole Administration G\'en\'erale et Moyens}
+      \nodepart{second}Brigitte HENRAS
+    };
+  \node[PECR, rectangle split, rectangle split parts=2, xshift=160pt, yshift=-50pt, yshift=-15pt] (c2) {
+      \textbf{P\^ole Emploi,\\Recrutement, Concours}
+      \nodepart{second}Chrystel MINELLO
+    };
+  \node[PCSGC, rectangle split, rectangle split parts=2, xshift=320pt, yshift=-50pt, yshift=-15pt] (c3) {
+      \textbf{P\^ole Conseil Statutaire, Gestion des Carri\`eres}
+      \nodepart{second}Agn\`es BEZZINA
+    };
+  \node[PSPPS, rectangle split, rectangle split parts=2, xshift=480pt, yshift=-50pt, yshift=-15pt] (c4) {
+      \textbf{P\^ole Sant\'e, Pr\'evention, Assurance Statutaire}
+      \nodepart{second}Sabine CUVIER
+    };
+  \node[PN, rectangle split, rectangle split parts=2, xshift=640pt, yshift=-50pt, yshift=-15pt] (c5) {
+      \textbf{P\^ole Num\'erique}
+      \nodepart{second}Fr\'ed\'eric FRANCES
+    };
+
+% The second level, relatively positioned nodes
+\begin{scope}[every node/.style={level 2}]
+
+% Services du pole administration general et moyens
+\node [PAGMService, below of = c1, xshift=15pt, yshift=-20pt, rectangle split, rectangle split parts=2] (c11) {
+  \textbf{Comptabilit\'e}
+  \nodepart{second}comptabilite\verb+@+cdg46.fr
+};
+\node [below of = c11, fill=ocre, text=black] (c111) {
+   \textnormal{Alexandra PONTHIER}
+};
+\node [below of = c111, fill=ocre, text=black, yshift=-10pt] (c12) {
+   \textbf{Paye}
+};
+\node [PAGMService, below of = c12, yshift=10pt] (c121) {
+  \textnormal{Alexandra PONTHIER}
+};
+\node [PAGMService, below of = c121, yshift=-20pt, rectangle split, rectangle split parts=2] (c13) {
+  \textbf{Accueil}
+  \nodepart{second}contact\verb+@+cdg46.fr
+};
+\node [PAGMService, below of = c13, yshift=-5pt, rectangle split, rectangle split parts=2] (c131) {
+  \nodepart{one}Fabienne FRAYSSE
+  \nodepart{second}Isabelle LAGARDE
+};
+\node [PAGMService, below of = c131, yshift=-20pt] (c14) {
+  \textbf{Entretien des locaux}
+};
+\node [PAGMService, below of = c14, yshift=10pt] (c141) {
+  \textnormal{Fabienne PRONIER}
+};
+\node [PAGMService, below of = c141, yshift=-20pt, rectangle split, rectangle split parts=2] (c15) {
+  \textbf{Archives}
+  \nodepart{second}archives\verb+@+cdg46.fr
+};
+\node [PAGMService, below of = c15, yshift=-5pt] (c151) {
+  \textnormal{Ana\"is MARCHESI}
+};
+
+% Services du Pole emploi, recrutement, concours
+\node [PECRService, below of = c2, xshift=15pt, yshift=-25pt, rectangle split, rectangle split parts=2] (c21) {
+  \textbf{Service Concours et Remplacement}
+  \nodepart{second}concours\verb+@+cdg46.fr
+};
+\node [PECRService, below of = c21, yshift=-15pt,rectangle split, rectangle split parts=2] (c211) {
+  \nodepart{one}Chrystel MINELLO
+  \nodepart{second}Isabelle LAGARDE
+};
+\node [PECRService, below of = c211, yshift=-20pt, rectangle split, rectangle split parts=2] (c22) {
+  \textbf{Bourse de l'emploi}
+  \nodepart{second}emploi\verb+@+cdg46.fr
+};
+\node [PECRService, below of = c22] (c221) {
+  \textnormal{Isabelle LAGARDE}
+};
+\node [PECRService, below of = c221, yshift=-20pt, rectangle split, rectangle split parts=2] (c23) {
+  \textbf{Comit\'e Technique}
+  \nodepart{second}ctp\verb+@+cdg46.fr
+};
+\node [PECRService, below of = c23] (c231) {
+  \textnormal{Chrystel MINELLO}
+};
+\node [PECRService, below of = c231, yshift=-20pt, rectangle split, rectangle split parts=2] (c24) {
+  \textbf{Bilan Social}
+  \nodepart{second}bilansocial\verb+@+cdg46.fr
+};
+\node [PECRService, below of = c24, yshift=-7pt, rectangle split, rectangle split parts=2] (c241) {
+  \nodepart{one}Chrystel MINELLO
+  \nodepart{second}Isabelle LAGARDE
+};
+% pole conseil statutaire, gestion carrieres
+\node [PCSGCService, below of = c3, xshift=15pt, yshift=-20pt, rectangle split, rectangle split parts=2] (c31) {
+  \textbf{Conseil Statutaire}
+  \nodepart{second}statut\verb+@+cdg46.fr
+};
+\node [PCSGCService, below of = c31] (c311) {
+  \textnormal{Agn\`es BEZZINA}
+};
+\node [PCSGCService, below of = c311, yshift=-2pt, rectangle split, rectangle split parts=2] (c32) {
+  \textbf{Gestion des Carrieres}
+  \nodepart{second}carrieres\verb+@+cdg46.fr
+};
+\node [PCSGCService, below of = c32, yshift=-7pt, rectangle split, rectangle split parts=2] (c321) {
+  \nodepart{one}Ang\'elique LIOGER
+  \nodepart{second}L\ae titia RAYNAL
+};
+
+\node [PCSGCService, below of = c321, yshift=-10pt, rectangle split, rectangle split parts=2] (c33) {
+  \textbf{Retraite}
+  \nodepart{second}retraites\verb+@+cdg46.fr
+};
+\node [PCSGCService, below of = c33, yshift=-5pt, rectangle split, rectangle split parts=2] (c331) {
+  \nodepart{one}Corine JOSEPH
+  \nodepart{second}Alexandre FAGES
+};
+\node [PCSGCService, below of = c331, yshift=-20pt, rectangle split, rectangle split parts=2] (c34) {
+  \textbf{Commission de R\'eforme}
+  \nodepart{second}commission-reforme\verb+@+cdg46.fr
+};
+\node [PCSGCService, below of = c34, yshift=-17pt, rectangle split, rectangle split parts=2] (c341) {
+  \nodepart{one}Corine JOSEPH
+  \nodepart{second}Alexandre FAGES
+};
+\node [PCSGCService, below of = c341, yshift=-10pt, rectangle split, rectangle split parts=2] (c35) {
+  \textbf{Comit\'e M\'edical}
+  \nodepart{second} comitemedical\verb+@+cdg46.fr
+};
+\node [PCSGCService, below of = c35, yshift=-5pt, rectangle split, rectangle split parts=2] (c351) {
+  \nodepart{one}Corine JOSEPH
+  \nodepart{second}Alexandre FAGES
+};
+
+
+% Service pole sante prevention
+\node [PSPPSService, below of = c4, xshift=15pt, yshift=-28pt, rectangle split, rectangle split parts=2] (c41) {
+  \textbf{Pr\'evention,\\Hygi\`ene et S\'ecurit\'e}
+  \nodepart{second}hygiene-securite\verb+@+cdg46.fr
+};
+
+\node [below of = c41, yshift=-12pt, bleuSanteColors, rectangle split, rectangle split parts=2] (c411) {
+  \nodepart{one}Sabine Cuvier
+  \nodepart{second}Aur\'elie PELOFY
+};
+\node [below of = c411, yshift=-10pt, bleuSanteColors, rectangle split, rectangle split parts=2] (c43) {
+  \textbf{Handicap}
+  \nodepart{second}handicap\verb+@+cdg46.fr
+};
+\node [below of = c43, bleuSanteColors] (c431) {
+  \textnormal{Sabine CUVIER}
+};
+\node [below of = c431, yshift=-2pt, bleuSanteColors, rectangle split, rectangle split parts=2] (c44) {
+  \textbf{Assurance Statutaire}
+  \nodepart{second}assurances\verb+@+cdg46.fr
+};
+\node [below of = c44, bleuSanteColors] (c441) {
+  \textnormal{Francine PARDES}
+};
+\node [PSPPSService, below of = c441, yshift=0pt, rectangle split, rectangle split parts=2] (c42) {
+  \textbf{Sant\'e}
+  \nodepart{second}medecine\verb+@+cdg46.fr
+};
+\node [below of = c42, bleuSanteColors] (c451) {
+  \textnormal{Simone PECQUEUX}
+};
+\node [below of = c451, yshift=0pt, bleuSanteColors, rectangle split, rectangle split parts=2] (c46) {
+  \textbf{Secr\'etariat M\'edical}
+  \nodepart{second}Colette BELLANGER
+};
+\node [below of = c46, yshift=0pt, bleuSanteColors] (c47) {
+  \textbf{M\'edecins}
+};
+\node [below of = c47, bleuSanteColors, rectangle split, rectangle split parts=2] (c471) {
+  \nodepart{one}Simone PECQUEUX
+  \nodepart{second} \textsf{Gwena\"elle IARMARCOVAI}
+};
+\node [below of = c471, yshift=0pt, bleuSanteColors] (c48) {
+  \textbf{Infirmi\`eres}
+};
+\node [below of = c48, bleuSanteColors, rectangle split, rectangle split parts=2] (c481) {
+  \nodepart{one}Martine MILLAN
+  \nodepart{second}Vanessa BOUYSSOU
+};
+
+% pole numerique
+\node [PNService, below of = c5, xshift=15pt, yshift=-30pt, rectangle split, rectangle split parts=2] (c51) {
+  \textbf{Internet, D\'emat\'erialisation}
+  \nodepart{second}support\verb+@+cdg46.fr
+};
+\node [below of = c51, bleuNumColors, yshift=-20pt, rectangle split, rectangle split parts=3] (c511) {
+  \nodepart{one}Fr\'ed\'eric FRANCES
+  \nodepart{second}Claire HARLEZ
+  \nodepart{third}Yann BOGDANOVIC
+};
+%\node [bleuNumColors, below of = c511, yshift=-10pt ] (c5111) {Internet};
+%\node [bleuNumColors, below of = c5111, yshift=10pt] (c5112) {Sites WEB};
+%\node [bleuNumColors, below of = c5112, yshift=10pt] (c5113) {E-administration};
+%\node [bleuNumColors, below of = c5113, yshift=10pt] (c5114) {D\'emat\'erialisation};
+%\node [bleuNumColors, below of = c5114, yshift=10pt] (c5115) {March\'es Publics};
+%\node [bleuNumColors, below of = c5115, yshift=10pt] (c5116) {Contr\^ole de l\'egalit\'e};
+
+\node [PNService, below of = c511, yshift=-30pt, rectangle split, rectangle split parts=2] (c52) {
+  \textbf{Progiciels,\\Informatique}
+  \nodepart{second}progiciels\verb+@+cdg46.fr
+};
+\node [below of = c52, bleuNumColors, yshift=-15pt, rectangle split, rectangle split parts=2] (c521) {
+  \nodepart{one}Coralie COFFE
+  \nodepart{second}Patrick ONGUINDA
+};
+% \node [bleuNumColors, below of = c521, yshift=-2pt ] (c5211) {Progiciels};
+%\node [bleuNumColors, below of = c5211, yshift=10pt] (c5212) {Informatique};
+\node [PNService, below of = c521, yshift=-35pt, rectangle split, rectangle split parts=2] (c53) {
+  \textbf{Recherche et D\'eveloppement}
+  \nodepart{second}r\&d\verb+@+cdg46.fr
+};
+
+\node [below of = c53, bleuNumColors, yshift=-5pt] (c531) {
+  \textnormal{Yann BOGDANOVIC}
+};
+
+
+
+
+\end{scope}
+
+
+% lines from each level 1 node to every one of its "children"
+\draw[-] (direction.west) |- (ConseilAdministration.east);
+\draw[-] (direction.east) |- (c01.west);
+\foreach \value in {1,...,5}
+  \draw[-] (c\value.north) |- (0,-1.5) -| (c0.south);
+
+\foreach \value in {1,...,5}
+  \draw[-] (c1.south)  |- (-2,-4) |- (c1\value.west);
+
+\foreach \value in {1,...,4}
+  \draw[-] (c2.south) |- (3.5,-4) |- (c2\value.west);
+
+\foreach \value in {1,...,5}
+  \draw[-] (c3.south) |- (9.2,-4) |- (c3\value.west);
+
+\foreach \value in {1,...,4}
+  \draw[-] (c4.south) |- (14.8,-4) |- (c4\value.west);
+
+\foreach \value in {1,...,3}
+  \draw[-] (c5.south) |- (20.5,-4) |- (c5\value.west);
+
+
+
+\end{tikzpicture}
 \end{document}
